@@ -58,7 +58,7 @@ void draw(){
             );
   ////////////////////////////////////////////////////////////////////////////////////
 
-  moon.drawObjectOnCube(); 	//// SET LEDS TO ON AND APPLY SET COLOR --- COLOR PARAMETER SHOULD BE MOVED TO ITS OWN FUNCTION ////
+  moon.drawObjectOnCube(); 	                    //// SET LEDS TO ON ////
   moon.rotateObj(0.01, Z);
   moon.colorObj(color(255, 255, 250));
 
