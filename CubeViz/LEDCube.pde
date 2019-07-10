@@ -118,9 +118,9 @@ class LEDCube{
 				int currentZ = 0;
 				int zIncrement = 1;
 
-				for (int y = 0; y < cubeHeight; y++) {
-					for (int x = 0; x < cubeDepth; x++) {
-							if(x % 2 == 0){
+				for (int x = 0; x < cubeHeight; x++) {
+					for (int y = 0; y < cubeDepth; y++) {
+							if(y % 2 == 0){
 								//// EVERY OTHER LINE currentZ STARTS AT 0...
 								//// ...THIS IS BECAUSE THE DATA LINES SNAKE BACK-AND-FORTH UP EACH COLUMN
 								currentZ = 0;

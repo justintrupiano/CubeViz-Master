@@ -13,12 +13,16 @@ PeasyCam cam;
 
 LEDCube ledCube;
 
-Object3d moon;
+Object3d saturnV;
+Object3d flames;
+float position = -100;
+
 
 PShape newSphere;
 
 void settings(){
-  fullScreen(P3D, 1);
+  // fullScreen(P3D, 1);
+  size(1000, 1000, P3D);
 }
 
 void setup(){
@@ -34,18 +38,33 @@ void setup(){
   //// LEDCube(int height, int depth, int width, int distBetweenLEDS).
   ledCube = new LEDCube(16,16,16,100);
 
-  //// INITIATE NEW Object3d OBJECT. POSITIONED IN THE CENTER OF THE CUBE, WITH A SCALE ON THE XYZ COORDINATES.
-  moon = new Object3d(new PVector((ledCube.cubeHeight-0.75)/2,
-                                  (ledCube.cubeDepth-0.75)/2,
+  //// INITIATE NEW 3D OBJECT
+  // objectVar = new Object3d(new PVector(<<CENTER VECTOR>>),       //// POSITION OF OBJECT
+  //                          new PVector(<<SCALE X,Y,Z>>),         //// SCALE OF OBJECT
+  //                         cubeVar                                //// CUBE TO PUT OBJECT ON -- THIS IS IN CASE USER CREATES MULTIPLE CUBES
+  //                         );
+
+  saturnV = new Object3d(new PVector((ledCube.cubeHeight-0.75)/2,
+                                  (position),
                                   (ledCube.cubeWidth-0.75)/2
                                   ),                  //// OBJECT POSITION
-                          new PVector(8,8,8),   //// SCALE OF OBJECT
+                          new PVector(1,1,1),   //// SCALE OF OBJECT
                           ledCube                     //// CUBE TO PUT OBJECT ON -- THIS IS INCASE USER CREATES MULTIPLE CUBES
                           );
 
-  moon.loadOBJ(dataDir + "crecentMoon.obj");
-}
+  flames = new Object3d(new PVector((ledCube.cubeHeight-0.75)/2,
+                                  (position),
+                                  (ledCube.cubeWidth-0.75)/2
+                                  ),                  //// OBJECT POSITION
+                          new PVector(1,1,1),   //// SCALE OF OBJECT
+                          ledCube                     //// CUBE TO PUT OBJECT ON -- THIS IS INCASE USER CREATES MULTIPLE CUBES
+                          );
 
+  saturnV.loadOBJ(dataDir + "saturnV.obj"); //// THIS LOADS ONLY THE VERTS, SO THE MORE VERTS THE MORE DENSE THE DISPLAY
+  // saturnV.loadOBJ(dataDir + "saturnV_lowRes.obj"); //// THIS LOADS ONLY THE VERTS, SO THE MORE VERTS THE MORE DENSE THE DISPLAY
+  flames.loadOBJ(dataDir + "flames.obj"); //// THIS LOADS ONLY THE VERTS, SO THE MORE VERTS THE MORE DENSE THE DISPLAY
+
+}
 
 
 void draw(){
@@ -58,11 +77,33 @@ void draw(){
             );
   ////////////////////////////////////////////////////////////////////////////////////
 
-  moon.drawObjectOnCube(); 	                    //// SET LEDS TO ON ////
-  moon.rotateObj(0.01, Z);
-  moon.colorObj(color(255, 255, 250));
+  ledCube.colorCube(color(00,15,33));
+  if (position < 100){
+    position += 1;
+  }
+  else{
+    position = -100;
+  }
 
-  ledCube.saveFrames(500, "Output.bmp");        ////SAVES Output.bmp FILE WITH EVERY FRAME FROM START OF VIZ UNTIL FRAME OF SPECIFIED INT ////
+  saturnV.objPosition.y = position;
+  saturnV.drawObjectOnCube();	                    //// SET LEDS TO ON ////
+
+  flames.objPosition.y  = position - 5;
+
+  flames.colorObj(color(61, 101, 192)); /// BLUE-ISH
+  flames.drawObjectOnCube();
+
+  flames.objPosition.y  = position;
+
+  flames.colorObj(color(221, 100, 53)); /// ORANGE-ISH
+  flames.drawObjectOnCube();
+
+  saturnV.colorObj(color(200, 200, 200));
+  // flames.colorObj(color(200, 75, 0));
+  // ledCube.highlightCorners();
+  ledCube.saveFrames(800, "Output.bmp");        ////SAVES Output.bmp FILE WITH EVERY FRAME FROM START OF VIZ UNTIL FRAME OF SPECIFIED INT ////
+
+
   ledCube.displayCube();						            //// DISPLAYS CUBE FOR USER --- DATA IS STILL PROCESSED ////
   ledCube.clearCube(); 							            //// RESET ALL LEDS BACK TO color(0) --- READY FOR NEXT FRAME ////
 
