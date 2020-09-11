@@ -22,7 +22,7 @@ PShape newSphere;
 
 void settings(){
   // fullScreen(P3D, 1);
-  size(1000, 1000, P3D);
+  size(500, 500, P3D);
 }
 
 void setup(){
@@ -60,7 +60,7 @@ void setup(){
                           ledCube                     //// CUBE TO PUT OBJECT ON -- THIS IS INCASE USER CREATES MULTIPLE CUBES
                           );
 
-  saturnV.loadOBJ(dataDir + "saturnV.obj"); //// THIS LOADS ONLY THE VERTS, SO THE MORE VERTS THE MORE DENSE THE DISPLAY
+  saturnV.loadOBJ(dataDir + "saturnV_lowRes.obj"); //// THIS LOADS ONLY THE VERTS, SO THE MORE VERTS THE MORE DENSE THE DISPLAY
   // saturnV.loadOBJ(dataDir + "saturnV_lowRes.obj"); //// THIS LOADS ONLY THE VERTS, SO THE MORE VERTS THE MORE DENSE THE DISPLAY
   flames.loadOBJ(dataDir + "flames.obj"); //// THIS LOADS ONLY THE VERTS, SO THE MORE VERTS THE MORE DENSE THE DISPLAY
 
